@@ -1,0 +1,19 @@
+{
+  "name": "xr-layers-test-drm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sky-hugolima/xr-layers-test-drm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sky-hugolima/xr-layers-test-drm/issues"
+  },
+  "homepage": "https://github.com/sky-hugolima/xr-layers-test-drm#readme"
+}
