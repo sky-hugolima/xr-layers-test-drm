@@ -173,14 +173,7 @@ async function startExperience(videoEl, xrSession) {
 }
 
 async function setupVR(videoEl) {
-    const vrButton = new VRButton(
-        {
-            requiredFeatures: ['layers'],
-            optionalFeatures: ['local-floor', 'bounded-floor'],
-        }, 
-        (xrSession) => startExperience(videoEl, xrSession)
-    );
-
+    const vrButton = new VRButton((xrSession) => startExperience(videoEl, xrSession));
     document.body.appendChild(vrButton.domElement);
 }
 
