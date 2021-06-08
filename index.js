@@ -1,3 +1,5 @@
+let assetType;
+let vrButton;
 class VRButton {
   constructor(onSessionStarted) {
     this.domElement = null;
@@ -40,6 +42,14 @@ class VRButton {
     }
   }
 
+  destroy() {
+      if (!this.domElement) {
+          return;
+      }
+      document.body.removeChild(this.domElement);
+      this.domElement = null;
+  }
+
   #disableButton() {
     this.domElement.style.display = "";
 
@@ -60,7 +70,7 @@ class VRButton {
     element.style.border = "1px solid #fff";
     element.style.borderRadius = "4px";
     element.style.background = "rgba(0,0,0,0.1)";
-    element.style.color = "#fff";
+    element.style.color = "black";
     element.style.font = "normal 13px sans-serif";
     element.style.textAlign = "center";
     element.style.opacity = "0.5";
@@ -72,7 +82,7 @@ class VRButton {
     const onSessionEnded = async () => {
       this.session.removeEventListener("end", onSessionEnded);
 
-      this.domElement.textContent = "ENTER VR";
+      this.domElement.textContent = `ENTER VR (${assetType})`;
 
       this.session = null;
     };
@@ -93,7 +103,7 @@ class VRButton {
     this.domElement.style.left = "calc(50% - 50px)";
     this.domElement.style.width = "100px";
 
-    this.domElement.textContent = "ENTER VR";
+    this.domElement.textContent = `ENTER VR (${assetType})`;
 
     this.domElement.onmouseenter = () => {
       this.domElement.style.opacity = "0.5";
@@ -119,33 +129,42 @@ class VRButton {
   }
 }
 
-async function createVideo() {
-  const videoEl = document.createElement("video");
-  const player = new shaka.Player(videoEl);
-  const config = {
-    drm: {
-      servers: {
-        "com.widevine.alpha": "https://widevine-proxy.appspot.com/proxy",
+async function startMSEPlayback(videoEl) {
+    const player = new shaka.Player(videoEl);
+    const config = {
+      drm: {
+        servers: {
+          "com.widevine.alpha": "https://widevine-proxy.appspot.com/proxy",
+        },
       },
-    },
-  };
+    };
+    player.configure(config);
+  
+    // DRM protected stream
+    // await player.load('https://bitmovin-a.akamaihd.net/content/art-of-motion_drm/mpds/11331.mpd');
+  
+    // Clear stream
+    await player.load(
+      "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd"
+    );  
+}
 
-  videoEl.style.position = "absolute";
+async function createVideo(useMSE) {
+  const videoEl = document.createElement("video");
+  videoEl.style.position = 'absolute';
   videoEl.style.top = 0;
   videoEl.style.left = 0;
-  videoEl.crossOrigin = "anonymous";
-  videoEl.preload = "auto";
+  videoEl.width = 1920;
+  videoEl.height = 1080;
+  videoEl.crossOrigin = 'anonymous';
+  videoEl.preload = 'auto';
   videoEl.autoload = true;
 
-  player.configure(config);
-
-  // DRM protected stream
-  // await player.load('https://bitmovin-a.akamaihd.net/content/art-of-motion_drm/mpds/11331.mpd');
-
-  // Clear stream
-  await player.load(
-    "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd"
-  );
+  if (useMSE) {
+    await startMSEPlayback(videoEl);
+  } else {
+    videoEl.src = 'https://d25a56pc18k0co.cloudfront.net/sloths_binaural_3840x2160_360_3D_v2_injected.mp4';
+  }
 
   return videoEl;
 }
@@ -165,11 +184,15 @@ async function startExperience(videoEl, xrSession) {
         space: refSpace,
         layout: "mono",
         transform: new XRRigidTransform({
-        x: 0.0,
-        y: 1.3,
-        z: -2.75,
-        w: 1.0,
+            x: 0.0,
+            y: 1.3,
+            z: -2.75,
+            w: 1.0,
         }),
+        viewPixelWidth: 1920,
+        viewPixelHeight: 1080,
+        width: 1,
+        height: 0.8,
     });
     xrSession.updateRenderState({
         layers: [layer],
@@ -178,10 +201,21 @@ async function startExperience(videoEl, xrSession) {
 }
 
 async function setupVR(videoEl) {
-  const vrButton = new VRButton((xrSession) =>
+  if (vrButton) {
+    vrButton.destroy();
+  }
+  vrButton = new VRButton((xrSession) =>
     startExperience(videoEl, xrSession)
   );
   document.body.appendChild(vrButton.domElement);
 }
 
-createVideo().then(setupVR);
+document.getElementById('playMSE').addEventListener('click', () => {
+    assetType = 'MSE';
+    createVideo(true).then(setupVR);
+});
+
+document.getElementById('playProgressive').addEventListener('click', () => {
+    assetType = 'Progressive';
+    createVideo().then(setupVR);
+});
