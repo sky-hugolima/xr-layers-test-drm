@@ -158,23 +158,23 @@ function onXRFrame(t, frame) {
 }
 
 async function startExperience(videoEl, xrSession) {
-  const refSpace = await xrSession.requestReferenceSpace("local");
-  xrSession.requestAnimationFrame(onXRFrame);
-  const layerFactory = new XRMediaBinding(xrSession);
-  const layer = await layerFactory.createQuadLayer(videoEl, {
-    space: refSpace,
-    layout: "mono",
-    transform: new XRRigidTransform({
-      x: 0.0,
-      y: 1.3,
-      z: -2.75,
-      w: 1.0,
-    }),
-  });
-  xrSession.updateRenderState({
-    layers: [layer],
-  });
-  videoEl.play();
+    await videoEl.play();
+    const refSpace = await xrSession.requestReferenceSpace("local");
+    const layerFactory = new XRMediaBinding(xrSession);
+    const layer = await layerFactory.createQuadLayer(videoEl, {
+        space: refSpace,
+        layout: "mono",
+        transform: new XRRigidTransform({
+        x: 0.0,
+        y: 1.3,
+        z: -2.75,
+        w: 1.0,
+        }),
+    });
+    xrSession.updateRenderState({
+        layers: [layer],
+    });
+    xrSession.requestAnimationFrame(onXRFrame);
 }
 
 async function setupVR(videoEl) {
