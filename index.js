@@ -141,7 +141,7 @@ async function startMSEPlayback(videoEl) {
     player.configure(config);
   
     // DRM protected stream
-    await player.load('https://content.uplynk.com/847859273a4b4a81959d8fea181672a4.mpd?pr.version=2&pr.playenabler=B621D91F-EDCC-4035-8D4B-DC71760D43E9&pr.securitylevel=150');
+    await player.load('https://content.uplynk.com/847859273a4b4a81959d8fea181672a4.mpd');
   
     // Clear stream
     // await player.load(
