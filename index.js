@@ -154,8 +154,10 @@ async function createVideo(useMSE) {
   videoEl.style.position = 'absolute';
   videoEl.style.top = 0;
   videoEl.style.left = 0;
-  videoEl.width = 1920;
+  /*
+  videoEl.width = 3000;
   videoEl.height = 1080;
+  */
   videoEl.crossOrigin = 'anonymous';
   videoEl.preload = 'auto';
   videoEl.autoload = true;
@@ -189,7 +191,6 @@ async function startExperience(videoEl, xrSession) {
             z: -2.75,
             w: 1.0,
         }),
-        viewPixelWidth: 4000,
         width: 4,
         height: 2
     });
