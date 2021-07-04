@@ -134,14 +134,14 @@ async function startMSEPlayback(videoEl) {
     const config = {
       drm: {
         servers: {
-          "com.widevine.alpha": "https://proxy.uat.widevine.com/proxy?video_id=HDCP_V1&provider=widevine_test",
+          'com.widevine.alpha': 'https://widevine-proxy.appspot.com/proxy',
         },
       },
     };
     player.configure(config);
   
     // DRM protected stream
-    await player.load('https://storage.googleapis.com/wvmedia/cenc/h264/tears/tears.mpd');
+    await player.load('https://bitmovin-a.akamaihd.net/content/art-of-motion_drm/mpds/11331.mpd');
   
     // Clear stream
     // await player.load(
@@ -189,10 +189,12 @@ async function startExperience(videoEl, xrSession) {
             z: -2.75,
             w: 1.0,
         }),
+        /*
         viewPixelWidth: 1920,
         viewPixelHeight: 1080,
         width: 1,
         height: 0.8,
+        */
     });
     xrSession.updateRenderState({
         layers: [layer],
