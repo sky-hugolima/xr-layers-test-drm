@@ -151,13 +151,6 @@ async function startMSEPlayback(videoEl) {
 
 async function createVideo(useMSE) {
   const videoEl = document.createElement("video");
-  videoEl.style.position = 'absolute';
-  videoEl.style.top = 0;
-  videoEl.style.left = 0;
-  /*
-  videoEl.width = 3000;
-  videoEl.height = 1080;
-  */
   videoEl.crossOrigin = 'anonymous';
   videoEl.preload = 'auto';
   videoEl.autoload = true;
@@ -191,8 +184,7 @@ async function startExperience(videoEl, xrSession) {
             z: -2.75,
             w: 1.0,
         }),
-        width: 4,
-        height: 2
+        width: 2,
     });
     xrSession.updateRenderState({
         layers: [layer],
