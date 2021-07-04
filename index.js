@@ -154,7 +154,6 @@ async function createVideo(useMSE) {
   videoEl.crossOrigin = 'anonymous';
   videoEl.preload = 'auto';
   videoEl.autoload = true;
-  videoEl.height = 500;
 
   if (useMSE) {
     await startMSEPlayback(videoEl);
