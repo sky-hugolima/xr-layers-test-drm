@@ -134,14 +134,14 @@ async function startMSEPlayback(videoEl) {
     const config = {
       drm: {
         servers: {
-          'com.widevine.alpha': 'https://widevine-proxy.appspot.com/proxy',
+          'com.widevine.alpha': 'https://content.uplynk.com/wv',
         },
       },
     };
     player.configure(config);
   
     // DRM protected stream
-    await player.load('https://bitmovin-a.akamaihd.net/content/art-of-motion_drm/mpds/11331.mpd');
+    await player.load('https://content.uplynk.com/847859273a4b4a81959d8fea181672a4.mpd?pr.version=2&pr.playenabler=B621D91F-EDCC-4035-8D4B-DC71760D43E9&pr.securitylevel=150');
   
     // Clear stream
     // await player.load(
