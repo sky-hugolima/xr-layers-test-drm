@@ -141,12 +141,12 @@ async function startMSEPlayback(videoEl) {
     player.configure(config);
   
     // DRM protected stream
-    // await player.load('https://bitmovin-a.akamaihd.net/content/art-of-motion_drm/mpds/11331.mpd');
+    await player.load('https://bitmovin-a.akamaihd.net/content/art-of-motion_drm/mpds/11331.mpd');
   
     // Clear stream
-    await player.load(
-      "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd"
-    );  
+    // await player.load(
+    //   "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd"
+    // );  
 }
 
 async function createVideo(useMSE) {
@@ -178,11 +178,11 @@ function onXRFrame(t, frame) {
 
 async function startExperience(videoEl, xrSession) {
     await videoEl.play();
-    const refSpace = await xrSession.requestReferenceSpace("local");
+    const refSpace = await xrSession.requestReferenceSpace('local');
     const layerFactory = new XRMediaBinding(xrSession);
     const layer = await layerFactory.createQuadLayer(videoEl, {
         space: refSpace,
-        layout: "mono",
+        layout: 'mono',
         transform: new XRRigidTransform({
             x: 0.0,
             y: 1.3,
