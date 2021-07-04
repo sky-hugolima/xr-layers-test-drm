@@ -134,14 +134,14 @@ async function startMSEPlayback(videoEl) {
     const config = {
       drm: {
         servers: {
-          'com.widevine.alpha': 'https://content.uplynk.com/wv',
+          'com.widevine.alpha': 'https://cwip-shaka-proxy.appspot.com/no_auth',
         },
       },
     };
     player.configure(config);
   
     // DRM protected stream
-    await player.load('https://content.uplynk.com/847859273a4b4a81959d8fea181672a4.mpd');
+    await player.load('https://storage.googleapis.com/shaka-demo-assets/sintel-widevine/dash.mpd');
   
     // Clear stream
     // await player.load(
