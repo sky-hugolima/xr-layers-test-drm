@@ -181,7 +181,7 @@ async function startExperience(videoEl, xrSession) {
         transform: new XRRigidTransform({
             x: 0.0,
             y: 1.3,
-            z: -5.0,
+            z: 1.0,
             w: 1.0,
         }),
     });
