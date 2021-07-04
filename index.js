@@ -180,9 +180,9 @@ async function startExperience(videoEl, xrSession) {
         space: refSpace,
         layout: 'mono',
         transform: new XRRigidTransform({
-            x: 5.0,
-            y: 4.3,
-            z: 1.0,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
             w: 1.0,
         }),
     });
