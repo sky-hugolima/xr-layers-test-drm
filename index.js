@@ -189,7 +189,7 @@ async function startExperience(videoEl, xrSession) {
             z: -2.75,
             w: 1.0,
         }),
-        width: 2,
+        viewPixelWidth: 4000,
         /*
         viewPixelWidth: 1920,
         viewPixelHeight: 1080,
