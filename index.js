@@ -155,6 +155,7 @@ async function createVideo(useMSE) {
   videoEl.preload = 'auto';
   videoEl.autoload = true;
   videoEl.width = 4000;
+  videoEl.height = 2000;
 
   if (useMSE) {
     await startMSEPlayback(videoEl);
@@ -185,8 +186,8 @@ async function startExperience(videoEl, xrSession) {
             z: -3.0,
             w: 1.0,
         }),
-        width: 5,
-        height: 1,
+        width: 4,
+        height: 2,
     });
     xrSession.updateRenderState({
         layers: [layer],
