@@ -154,7 +154,7 @@ async function createVideo(useMSE) {
   videoEl.crossOrigin = 'anonymous';
   videoEl.preload = 'auto';
   videoEl.autoload = true;
-  videoEl.height = 1000;
+  videoEl.height = 500;
 
   if (useMSE) {
     await startMSEPlayback(videoEl);
@@ -181,8 +181,8 @@ async function startExperience(videoEl, xrSession) {
         layout: 'mono',
         transform: new XRRigidTransform({
             x: 0.0,
-            y: 0.0,
-            z: 0.0,
+            y: 1.3,
+            z: -3.0,
             w: 1.0,
         }),
     });
