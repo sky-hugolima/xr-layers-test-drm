@@ -184,7 +184,7 @@ async function startExperience(videoEl, xrSession) {
             z: -3.0,
             w: 1.0,
         }),
-        width: 2,
+        width: 5,
         height: 1,
     });
     xrSession.updateRenderState({
