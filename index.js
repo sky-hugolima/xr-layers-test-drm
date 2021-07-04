@@ -189,6 +189,7 @@ async function startExperience(videoEl, xrSession) {
             z: -2.75,
             w: 1.0,
         }),
+        viewPixelWidth: 4000,
         width: 4,
         height: 2
     });
