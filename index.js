@@ -191,8 +191,6 @@ async function startExperience(videoEl, xrSession) {
         }),
         viewPixelWidth: 1920,
         viewPixelHeight: 1080,
-        width: 2,
-        height: 0.8,
     });
     xrSession.updateRenderState({
         layers: [layer],
